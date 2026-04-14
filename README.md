@@ -64,3 +64,18 @@ chmod +x container-init.sh
 ./container-init.sh
 ```
 
+## Step 4: Launch the container
+
+Now we combine everything: `unshare` creates the namespaces, we attach to the cgroup, then the init script runs inside.
+
+```bash
+chmod +x launch.sh
+
+./launch.sh
+```
+
+### You should land at an Alpine shell:
+
+```bash
+/ #
+```
