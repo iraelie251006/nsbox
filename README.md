@@ -79,3 +79,28 @@ chmod +x launch.sh
 ```bash
 / #
 ```
+
+## verify the isolation is working:
+
+```bash
+# Inside the container:
+
+# PID isolation, we are PID 1
+echo "My PID: $$" # My PID: 1
+ps aux  # shows only our shell processes
+
+# UTS isolation, our own hostname
+hostname # mycontainer
+
+# Filesystem isolation, we see Alpine, not the host
+ls / #  Alpine rootfs, no host directories
+cat /etc/alpine-release # 3.19.1
+
+# Network isolation, only loopback
+ip link show # lo only, no host eth0
+
+# Can't see host processes
+cat /proc/1/cmdline # our shell, not systemd
+```
+
+
