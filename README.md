@@ -1,3 +1,26 @@
 # nsbox(NameSpace Box)
 
 A minimal container runtime built from scratch using Linux namespaces and cgroups (no Docker).
+
+## Prerequisites
+
+```bash
+# Ubuntu / Debian
+sudo apt-get install -y cgroup-tools debootstrap util-linux
+
+# Fedora / RHEL
+sudo dnf install -y libcgroup-tools util-linux
+
+# Check kernel has user namespaces enabled (should output 1)
+cat /proc/sys/kernel/unprivileged_userns_clone   # Debian/Ubuntu
+# Fedora: always enabled
+
+```
+
+## Step 1:  Build a minimal root filesystem
+
+We need something for the container's `/`. We'll use Alpine Linux's minirootfs 5 MB, self-contained, no package manager needed beyond `apk`.
+
+```bash
+# The rootfs has no kernel, it's just a userspace filesystem tree. The kernel we're using is the host kernel.
+```
