@@ -103,4 +103,53 @@ ip link show # lo only, no host eth0
 cat /proc/1/cmdline # our shell, not systemd
 ```
 
+## Step 5: Verify the cgroup limits are enforced
 
+```bash
+chmod +x cgroup_limits.sh
+
+./cgroup_limits.sh
+```
+
+To test the memory limit, run this inside the container:
+
+```bash
+# Inside container: try to allocate 300MB (should be killed at 256MB)
+dd if=/dev/zero bs=1M count=300 | cat > /dev/null
+# Killed  (OOM kill within the cgroup, host unaffected)
+```
+
+## Step 6: basic networking
+
+The container has its own net namespace but only a loopback. Let's wire it to the host with a veth pair:
+
+```bash
+chmod +x networking.sh
+
+./networking.sh
+```
+
+### verify:
+inside the container:
+```bash
+ping 10.42.0.1  # host reachable
+ping 8.8.8.8          # internet reachable (with NAT)
+wget -qO- https://ifconfig.me # shows host's IP (via NAT)
+```
+
+## step 7: clean up
+
+```bash
+# Inside container
+exit
+
+# On host: clean up cgroup
+sudo rmdir /sys/fs/cgroup/nsbox
+
+# Clean up networking
+sudo ip link del veth-host   # also removes veth-container
+sudo iptables -t nat -D POSTROUTING -s 10.42.0.0/24 -j MASQUERADE
+
+# Clean up rootfs mounts (if any got stuck)
+sudo umount -R "$CROOT/proc" "$CROOT/sys" "$CROOT/dev" 2>/dev/null
+```
