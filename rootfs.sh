@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-export CROOT=/tmp/mycontainer
+export CROOT=/tmp/nsbox
 mkdir -p "$CROOT"
 
 ALPINE_VER=3.19.1

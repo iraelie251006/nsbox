@@ -90,7 +90,7 @@ echo "My PID: $$" # My PID: 1
 ps aux  # shows only our shell processes
 
 # UTS isolation, our own hostname
-hostname # mycontainer
+hostname # nsbox
 
 # Filesystem isolation, we see Alpine, not the host
 ls / #  Alpine rootfs, no host directories
