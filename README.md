@@ -17,10 +17,31 @@ cat /proc/sys/kernel/unprivileged_userns_clone   # Debian/Ubuntu
 
 ```
 
-## Step 1:  Build a minimal root filesystem
+## Step 1: Build a minimal root filesystem
 
 We need something for the container's `/`. We'll use Alpine Linux's minirootfs 5 MB, self-contained, no package manager needed beyond `apk`.
 
 ```bash
 # The rootfs has no kernel, it's just a userspace filesystem tree. The kernel we're using is the host kernel.
+
+File: rootfs.sh
+```
+
+## Step 2: Create and configure the cgroup
+
+We'll use cgroups v2 here. First verify you're on v2
+
+```bash
+stat -fc %T /sys/fs/cgroup
+
+# output: cgroup2fs  ← good, you're on v2
+# output: tmpfs      ← you're on v1
+```
+
+If on cgroup v2 (the common case on modern distros):
+
+```bash
+chmod +x cgroupV2.sh
+
+./cgroupV2.sh
 ```
