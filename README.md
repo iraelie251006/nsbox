@@ -54,3 +54,13 @@ chmod +x cgroupV1.sh
 ./cgroupV1.sh
 ```
 
+## Step 3: Write the container entry script
+
+This script runs inside the new namespaces and sets up the environment before handing control to a shell.
+
+```bash
+chmod +x container-init.sh
+
+./container-init.sh
+```
+
