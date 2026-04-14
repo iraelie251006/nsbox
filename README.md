@@ -45,3 +45,12 @@ chmod +x cgroupV2.sh
 
 ./cgroupV2.sh
 ```
+
+If on cgroup v1 (older kernels), use `cgcreate`:
+
+```bash
+chmod +x cgroupV1.sh
+
+./cgroupV1.sh
+```
+
