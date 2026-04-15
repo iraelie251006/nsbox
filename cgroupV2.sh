@@ -10,5 +10,6 @@ sudo bash -c 'echo "128M" > /sys/fs/cgroup/nsbox/memory.high'
 sudo bash -c 'echo "500000 1000000" > /sys/fs/cgroup/nsbox/cpu.max'
 sudo bash -c 'echo "50" > /sys/fs/cgroup/nsbox/pids.max'
 
+# verify by printing to see if it worked
 cat /sys/fs/cgroup/nsbox/memory.max
 cat /sys/fs/cgroup/nsbox/cpu.max
