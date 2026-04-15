@@ -1,3 +1,4 @@
+# Get container PID and print it
 CPID=$(cat /sys/fs/cgroup/nsbox/cgroup.procs | head -1)
 echo "Container host PID: $CPID"
 
