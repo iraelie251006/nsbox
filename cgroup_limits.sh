@@ -3,6 +3,7 @@ echo "Container host PID: $CPID"
 
 cat /proc/$CPID/cgroup
 
+# set limits for memory and cpu
 cat /sys/fs/cgroup/nsbox/memory.max   # 268435456
 cat /sys/fs/cgroup/nsbox/cpu.max      # 500000 1000000
 
