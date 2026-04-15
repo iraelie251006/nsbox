@@ -1,3 +1,4 @@
+# setup subtree control for cgroup
 sudo bash -c 'echo "+cpu +memory +pids" > /sys/fs/cgroup/cgroup.subtree_control'
 
 sudo mkdir -p /sys/fs/cgroup/nsbox
