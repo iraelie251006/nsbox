@@ -1,5 +1,4 @@
 # On the HOST (in another terminal):
-
 CPID=$(cat /sys/fs/cgroup/nsbox/cgroup.procs | head -1)
 
 # Create veth pair
