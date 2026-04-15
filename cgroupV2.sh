@@ -1,6 +1,7 @@
 # setup subtree control for cgroup
 sudo bash -c 'echo "+cpu +memory +pids" > /sys/fs/cgroup/cgroup.subtree_control'
 
+# create a cgroup
 sudo mkdir -p /sys/fs/cgroup/nsbox
 
 sudo bash -c 'echo "256M" > /sys/fs/cgroup/nsbox/memory.max'
